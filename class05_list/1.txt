@@ -1,0 +1,49 @@
+    # lastLen 表示剩余长度
+    def max_sub(n, t, lastLen):
+        if t >= lastLen:
+            return n
+        curMaxNum = 0
+        # 对每一位进行遍历
+        for i in range(0, lastLen):
+            # 当前位值
+
+            curNum = (n // pow(10, (lastLen - i))) // pow(10, i)
+            lastNum = n % pow(10, i)
+
+            # with
+            curMaxNum = max(curMaxNum,  curNum * 10 + max_sub(lastNum, t - 1, lastLen - i))
+            # without
+            curMaxNum = max(curMaxNum, max_sub(n, t, lastLen - 1))
+
+        return curMaxNum
+--------------------------------------------------------
+
+function f(s, i, l){
+  if (i + 1 <= l)
+    return Number(s.substr(0, l));
+
+  if (!l)
+    return 0;
+    
+  return Math.max(
+    // With
+    Number(s[i]) + 10 * f(s, i - 1, l - 1),
+    // Without
+    f(s, i - 1, l)
+  );
+}
+
+var input = [
+  ['20125', 3],
+  ['20125', 5],
+  ['20125', 6],
+  ['12345', 3],
+  ['12345', 0],
+  ['12345', 1]
+];
+
+for (let [s, l] of input){
+  console.log(s + ', l: ' + l);
+  console.log(f(s, s.length-1, l));
+  console.log('');
+}

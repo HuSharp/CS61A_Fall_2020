@@ -4,7 +4,7 @@ version:
 Author: HuSharp
 Date: 2021-03-06 19:09:41
 LastEditors: HuSharp
-LastEditTime: 2021-03-07 01:23:35
+LastEditTime: 2021-03-08 00:29:27
 @Email: 8211180515@csu.edu.cn
 '''
 class Tree:
@@ -91,3 +91,9 @@ def prune(t, n):
     t.branches = [b for b in t.branches if b.label != n]
     for b in t.branches:
         prune(b, n)
+
+
+def print_tree(t, indent=0):
+    print(" " * indent + t.label)
+    for b in t.branchesa:
+        print_tree(t, indent + 1)
